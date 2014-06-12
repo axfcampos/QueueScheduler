@@ -31,10 +31,10 @@ public abstract class K implements Comparable<K> {
     @Override
     public int compareTo(K o) {
 
-        if(this.getUrgency() > o.getUrgency()){
+        if(this.getUrgency() >= o.getUrgency()){
             return 1; //im more urgent
         }else{
-            return 0; //im less urgent
+            return -1; //im less urgent
         }
     }
 
