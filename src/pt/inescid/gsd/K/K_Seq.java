@@ -1,4 +1,4 @@
-package pt.inescid.gsd.K;
+package pt.inescid.gsd.k;
 
 /**
  * Created by axfcampos on 07/06/14.
@@ -19,13 +19,24 @@ public class K_Seq extends K {
         this.currentSequence = 0;
     }
 
+    @Override
     public void incSequence(){
         this.currentSequence++;
     }
 
     @Override
+    public void incValue(double value) {
+
+    }
+
+    @Override
+    public void incTime() {
+
+    }
+
+    @Override
     public String toString() {
-        return "K( ., " + this.currentSequence + ":" + super.sequence + ", .)";
+        return "k( ., " + this.currentSequence + ":" + super.sequence + ", .)";
     }
 
     @Override

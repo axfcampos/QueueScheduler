@@ -1,11 +1,14 @@
 package pt.inescid.gsd;
 
+import pt.inescid.gsd.k.K_Seq;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by axfcampos on 06/06/14.
+ *
+ *
  */
 public class QueueScheduler {
 
@@ -25,6 +28,17 @@ public class QueueScheduler {
         return theQueue;
     }
 
+    //transactionid -> startTimestamp
+    //RowKey[] rows -> affected rows
+    public void insertTransaction(long transactionid, RowKey[] rows){
+
+        //para cada rowkey criar uma op
+    }
+
+    public void print(){
+        System.out.println(this.toString());
+    }
+
     @Override
     public String toString(){
 
@@ -42,9 +56,4 @@ public class QueueScheduler {
 
         return ret;
     }
-
-    public void print(){
-        System.out.println(this.toString());
-    }
-
 }

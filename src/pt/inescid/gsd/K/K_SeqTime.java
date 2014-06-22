@@ -1,4 +1,4 @@
-package pt.inescid.gsd.K;
+package pt.inescid.gsd.k;
 
 /**
  * Created by axfcampos on 07/06/14.

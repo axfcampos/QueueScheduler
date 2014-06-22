@@ -3,19 +3,22 @@ package pt.inescid.gsd;
 import java.util.*;
 
 /**
- * Created by axfcampos on 06/06/14.
  *
  * Incorporates the group of Operations involved in a Transaction
  * Reads and Puts
 */
 public class Transaction implements Comparable<Transaction> {
 
-    private List <Operation> ops;
+    private TreeMap<Operation, Long> ops;
     private List <Transaction> causalDependencies;
+    private long transactionid;
+    private long commit_ts; //might be usefull for recollect serial order
 
-    public Transaction(ArrayList<Operation> ops, ArrayList<Transaction> causalDependencies){
-        this.ops = ops;
-        this.causalDependencies = causalDependencies;
+    public Transaction(long transactionid, long commit_ts){
+        this.transactionid = transactionid;
+        this.commit_ts = commit_ts;
+        this.ops = new TreeMap<Operation, Long>();
+        this.causalDependencies = new ArrayList<Transaction>();
     }
 
 
@@ -37,13 +40,11 @@ public class Transaction implements Comparable<Transaction> {
                 return 1;
             }
         }
-
-
     }
 
     public boolean checkIfInDependencies(Transaction follower){
 
-        if(this.causalDependencies == null){
+        if(this.causalDependencies.isEmpty()){
             return false;
         }
 
@@ -77,8 +78,7 @@ public class Transaction implements Comparable<Transaction> {
     public Operation getMostUrgent(){
 
         //TODO find a way to sort and keep the order in which the operations were made (although it might be useless)
-        Collections.sort(ops);
-        return ops.get(0);
+        return ops.firstKey();
     }
 
     @Override
@@ -87,7 +87,7 @@ public class Transaction implements Comparable<Transaction> {
         String ret = "[";
 
         int size = ops.size();
-        for (Operation op : ops){
+        for (Operation op : ops.keySet()){
             size--;
             if(size == 0) {
                 ret += "   " + op.toString() + "  ]";

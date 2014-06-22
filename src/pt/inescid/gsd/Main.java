@@ -1,10 +1,11 @@
 package pt.inescid.gsd;
 
-import pt.inescid.gsd.K.K_Seq;
+import pt.inescid.gsd.k.K_Seq;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class Main {
 
@@ -26,33 +27,35 @@ public class Main {
 
         System.out.println(intlist);*/
 
-        //Transaction 1
-        ArrayList<Operation> ops1 = new ArrayList<Operation>();
-        ops1.add(new Operation(new K_Seq(10)));
-        ops1.add(new Operation(new K_Seq(10)));
-        Transaction t1 = new Transaction(ops1, null);
 
-        //Transaction 2
-        ArrayList<Operation> ops2 = new ArrayList<Operation>();
-        ops2.add(new Operation(new K_Seq(10)));
-        ops2.add(new Operation(new K_Seq(10)));
-        Transaction t2 = new Transaction(ops2, null);
 
-        //Transaction 3
-        ArrayList<Operation> ops3 = new ArrayList<Operation>();
-        ops3.add(new Operation(new K_Seq(10)));
-        ops3.add(new Operation(new K_Seq(10)));
-        Transaction t3 = new Transaction(ops3, null);
 
-        //Queue
-        QueueScheduler q = new QueueScheduler();
-        q.getQueueScheduler().add(t1);
-        q.getQueueScheduler().add(t3);
-        q.getQueueScheduler().add(t2);
+//        Set<RowKey> set = new HashSet<RowKey>();
+//        set.add(new RowKey());
+//
+//        //Queue
+//        QueueScheduler q = new QueueScheduler();
+//        q.insertTransaction(1, set.toArray(new RowKey[0]));
+//
+//        q.print();
+//        q.sort();
+//        q.print();
 
-        q.print();
-        q.sort();
-        q.print();
+        TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+
+        map.put(7, "a");
+        map.put(2, "b");
+        map.put(3, "c");
+        map.put(4, "e");
+        map.put(5, "f");
+        map.put(6, "g");
+
+        System.out.println(map.firstKey() + "   " + map.lastKey());
+
+        map.put(1, "lol");
+
+        System.out.println(map.firstKey() + "   " + map.lastKey());
 
     }
+
 }

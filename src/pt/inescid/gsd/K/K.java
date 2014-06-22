@@ -1,10 +1,8 @@
-package pt.inescid.gsd.K;
+package pt.inescid.gsd.k;
 
-
-import java.util.Date;
 
 /**
- * Created by axfcampos on 06/06/14.
+ * what up
  */
 public abstract class K implements Comparable<K> {
 
@@ -27,6 +25,12 @@ public abstract class K implements Comparable<K> {
     public abstract void reset();
 
     public abstract String toString();
+
+    public abstract void incSequence();
+
+    public abstract void incValue(double value);
+
+    public abstract void incTime();
 
     @Override
     public int compareTo(K o) {
