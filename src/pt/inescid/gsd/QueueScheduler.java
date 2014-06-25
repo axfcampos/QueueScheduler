@@ -31,9 +31,9 @@ public class QueueScheduler {
 
     //transactionid -> startTimestamp
     //RowKey[] rows -> affected rows
-    public void insertTransaction(long transactionid, long commit_ts, RowKey[] rows){
+    public void insertTransaction(long transaction_id, long commit_ts, RowKey[] rows){
 
-        Transaction tx = new Transaction(transactionid, commit_ts);
+        Transaction tx = new Transaction(transaction_id, commit_ts);
 
         for (RowKey r : rows){
             tx.addOperation(r);

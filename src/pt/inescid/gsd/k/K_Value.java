@@ -1,8 +1,6 @@
 package pt.inescid.gsd.k;
 
-/**
- * Created by axfcampos on 07/06/14.
- */
+
 public class K_Value extends K {
     @Override
     public void reset() {

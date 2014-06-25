@@ -1,7 +1,5 @@
 package pt.inescid.gsd;
 
-import pt.inescid.gsd.k.K;
-
 import java.util.*;
 
 /**
@@ -13,11 +11,11 @@ public class Transaction implements Comparable<Transaction> {
 
     private TreeMap<Operation, Long> ops;
     private List <Transaction> causalDependencies;
-    private long transactionid;
+    private long transaction_id; //start_ts?
     private long commit_ts; //might be usefull for recollect serial order
 
-    public Transaction(long transactionid, long commit_ts){
-        this.transactionid = transactionid;
+    public Transaction(long transaction_id, long commit_ts){
+        this.transaction_id = transaction_id;
         this.commit_ts = commit_ts;
         this.ops = new TreeMap<Operation, Long>();
         this.causalDependencies = new ArrayList<Transaction>();

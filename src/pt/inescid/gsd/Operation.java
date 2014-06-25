@@ -15,30 +15,33 @@ public class Operation implements Comparable<Operation> {
 
     public Operation(RowKey r){
 
-        if(r.sequence != -1 && r.value != -1 && r.time != -1){
-            this.k = new K_TimeSeqValue();
-        }else{
-        if(r.sequence != -1 && r.value != -1 && !(r.time != -1)){
-            this.k = new K_ValueSeq();
-        }else{
-        if(r.sequence != -1 && !(r.value != -1) && r.time != -1){
-            this.k = new K_SeqTime();
-        }else{
-        if(!(r.sequence != -1) && r.value != -1 && r.time != -1){
-            this.k = new K_TimeValue();
-        }else{
-        if(r.sequence != -1 && !(r.value != -1) && !(r.time != -1)){
-            this.k = new K_Seq(r.sequence);
-        }else{
-        if(!(r.sequence != -1) && !(r.value != -1) && r.time != -1){
-            this.k = new K_Time();
-        }else{
-        if(!(r.sequence != -1) && r.value != -1 && !(r.time != -1)){
-            this.k = new K_Value();
-        }else{
-            System.out.println("huge error K");
-        }}}}}}}
 
+//        if(r.sequence != -1 && r.value != -1 && r.time != -1){
+//            this.k = new K_TimeSeqValue();
+//        }else{
+//        if(r.sequence != -1 && r.value != -1 && !(r.time != -1)){
+//            this.k = new K_ValueSeq();
+//        }else{
+//        if(r.sequence != -1 && !(r.value != -1) && r.time != -1){
+//            this.k = new K_SeqTime();
+//        }else{
+//        if(!(r.sequence != -1) && r.value != -1 && r.time != -1){
+//            this.k = new K_TimeValue();
+//        }else{
+//        if(r.sequence != -1 && !(r.value != -1) && !(r.time != -1)){
+//            System.out.println("here");
+//            this.k = new K_Seq(r.sequence);
+//        }else{
+//        if(!(r.sequence != -1) && !(r.value != -1) && r.time != -1){
+//            this.k = new K_Time();
+//        }else{
+//        if(!(r.sequence != -1) && r.value != -1 && !(r.time != -1)){
+//            this.k = new K_Value();
+//        }else{
+//            System.out.println("huge error K");
+//        }}}}}}}
+
+        this.k = new K_Seq(r.sequence);
         this.hash = r.hashCode();
     }
 
