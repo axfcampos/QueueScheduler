@@ -1,5 +1,6 @@
 package pt.inescid.gsd;
 
+import pt.inescid.gsd.k.K;
 import pt.inescid.gsd.k.K_Seq;
 
 import java.util.ArrayList;
@@ -30,9 +31,15 @@ public class QueueScheduler {
 
     //transactionid -> startTimestamp
     //RowKey[] rows -> affected rows
-    public void insertTransaction(long transactionid, RowKey[] rows){
+    public void insertTransaction(long transactionid, long commit_ts, RowKey[] rows){
 
-        //para cada rowkey criar uma op
+        Transaction tx = new Transaction(transactionid, commit_ts);
+
+        for (RowKey r : rows){
+            tx.addOperation(r);
+        }
+
+        this.theQueue.add(tx);
     }
 
     public void print(){

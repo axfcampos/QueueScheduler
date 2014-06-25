@@ -3,7 +3,9 @@ package pt.inescid.gsd.k;
 /**
  * Created by axfcampos on 07/06/14.
  */
-public class K_TimeValue extends K {
+public class K_TimeSeqValue extends K {
+
+
     @Override
     public void reset() {
 
@@ -14,8 +16,14 @@ public class K_TimeValue extends K {
         return null;
     }
 
+
     @Override
     public double getUrgency() {
         return 0;
+    }
+
+    @Override
+    public void updateKValues(double v) {
+
     }
 }

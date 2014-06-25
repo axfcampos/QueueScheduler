@@ -1,8 +1,6 @@
 package pt.inescid.gsd.k;
 
-/**
- * Created by axfcampos on 07/06/14.
- */
+
 public class K_Seq extends K {
 
     private int currentSequence;
@@ -19,25 +17,16 @@ public class K_Seq extends K {
         this.currentSequence = 0;
     }
 
-    @Override
-    public void incSequence(){
+    public void updateKValues(double v) {
         this.currentSequence++;
-    }
-
-    @Override
-    public void incValue(double value) {
-
-    }
-
-    @Override
-    public void incTime() {
-
     }
 
     @Override
     public String toString() {
         return "k( ., " + this.currentSequence + ":" + super.sequence + ", .)";
     }
+
+
 
     @Override
     public double getUrgency() {

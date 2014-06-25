@@ -1,5 +1,7 @@
 package pt.inescid.gsd;
 
+import pt.inescid.gsd.k.K;
+
 import java.util.*;
 
 /**
@@ -21,6 +23,11 @@ public class Transaction implements Comparable<Transaction> {
         this.causalDependencies = new ArrayList<Transaction>();
     }
 
+    public void addOperation(RowKey row){
+
+        Operation op = new Operation(row);
+        ops.put(op, (long)op.hashCode());
+    }
 
 
     @Override

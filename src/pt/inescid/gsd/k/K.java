@@ -1,6 +1,5 @@
 package pt.inescid.gsd.k;
 
-
 /**
  * what up
  */
@@ -15,9 +14,11 @@ public abstract class K implements Comparable<K> {
     public long getTime() {
         return time;
     }
+
     public int getSequence() {
         return sequence;
     }
+
     public double getValue() {
         return value;
     }
@@ -26,22 +27,18 @@ public abstract class K implements Comparable<K> {
 
     public abstract String toString();
 
-    public abstract void incSequence();
-
-    public abstract void incValue(double value);
-
-    public abstract void incTime();
-
     @Override
     public int compareTo(K o) {
 
-        if(this.getUrgency() >= o.getUrgency()){
+        if (this.getUrgency() >= o.getUrgency()) {
             return 1; //im more urgent
-        }else{
+        } else {
             return -1; //im less urgent
         }
     }
 
     public abstract double getUrgency();
+
+    public abstract void updateKValues(double v);
 
 }

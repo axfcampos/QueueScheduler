@@ -13,19 +13,37 @@ public class Operation implements Comparable<Operation> {
     //private RowKeyRead = null or not
     //private RowKeyWrite = null or not
 
-    public Operation(K k, long hash){
-        this.k = k;
-        this.hash = hash;
+    public Operation(RowKey r){
+
+        if(r.sequence != -1 && r.value != -1 && r.time != -1){
+            this.k = new K_TimeSeqValue();
+        }else{
+        if(r.sequence != -1 && r.value != -1 && !(r.time != -1)){
+            this.k = new K_ValueSeq();
+        }else{
+        if(r.sequence != -1 && !(r.value != -1) && r.time != -1){
+            this.k = new K_SeqTime();
+        }else{
+        if(!(r.sequence != -1) && r.value != -1 && r.time != -1){
+            this.k = new K_TimeValue();
+        }else{
+        if(r.sequence != -1 && !(r.value != -1) && !(r.time != -1)){
+            this.k = new K_Seq(r.sequence);
+        }else{
+        if(!(r.sequence != -1) && !(r.value != -1) && r.time != -1){
+            this.k = new K_Time();
+        }else{
+        if(!(r.sequence != -1) && r.value != -1 && !(r.time != -1)){
+            this.k = new K_Value();
+        }else{
+            System.out.println("huge error K");
+        }}}}}}}
+
+        this.hash = r.hashCode();
     }
 
-    public void updateKValues(){
-        this.k.incSequence();
-        this.k.incTime();
-    }
-    public void updateKValues(double v){
-        this.k.incValue(v);
-        this.k.incSequence();
-        this.k.incTime();
+    public void updateKValues(double value){
+        this.k.updateKValues(value);
     }
 
 
