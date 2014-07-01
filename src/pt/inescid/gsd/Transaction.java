@@ -23,6 +23,12 @@ public class Transaction implements Comparable<Transaction> {
 
     public void addOperation(RowKey row){
 
+        //O update dos K values deve estar implicito neste metodo
+        //Pois quando ha uma nova operacao a ser colocada numa transacao deve-se ver
+        //As restantes transacoes e verificar se ha updates a fazer.
+        //Portanto nao vai ser neste metodo. Vai ser no metodo do QueueScheduler
+        //Onde se tem a visao global das transacoes.
+
         Operation op = new Operation(row);
         ops.put(op, (long)op.hashCode());
     }
@@ -86,10 +92,12 @@ public class Transaction implements Comparable<Transaction> {
         return ops.firstKey();
     }
 
+
+
     @Override
     public String toString(){
 
-        String ret = "[";
+        String ret = "[ tx_id: " + this.transaction_id + " c_ts: " + this.commit_ts + "\n";
 
         int size = ops.size();
         for (Operation op : ops.keySet()){
@@ -97,7 +105,7 @@ public class Transaction implements Comparable<Transaction> {
             if(size == 0) {
                 ret += "   " + op.toString() + "  ]";
             }else{
-            if(size == (ops.size()-1)){
+            if(size == (ops.size())){
                 ret += "  " + op.toString() + ",\n";
             }else{
                 ret += "   " + op.toString() + ",\n";

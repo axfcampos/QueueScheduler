@@ -25,16 +25,22 @@ public class QueueScheduler {
         Collections.sort(theQueue);
     }
 
-    public List<Transaction> getQueueScheduler(){
-        return theQueue;
-    }
-
     //transactionid -> startTimestamp
     //RowKey[] rows -> affected rows
     public void insertTransaction(long transaction_id, long commit_ts, RowKey[] rows){
 
         Transaction tx = new Transaction(transaction_id, commit_ts);
 
+
+        //Aqui tem que se verificar outras operacoes existentes
+        //Ver se sao as mesmas e fazer update... portanto as cenas dos hash_codes estao mal??
+        //.....
+        //Identificando assim tabem se ha operacoes em comum que teem que ser update entano tambem he dependencias implicitas.
+        //Caso nao venha nenhuma dependencia explicita. Serao inferidas dependencias implicitas atravez deste metodo!!!! :D
+
+
+        //Agora tenho de resolver o problema do id da operacao. Ver como e que eles fazem no Omid e simplesmente fazer hijack
+        //esses ids... ou implementar algo parecido.
         for (RowKey r : rows){
             tx.addOperation(r);
         }

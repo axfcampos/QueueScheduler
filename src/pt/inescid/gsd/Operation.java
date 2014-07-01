@@ -64,6 +64,6 @@ public class Operation implements Comparable<Operation> {
 
     @Override
     public String toString(){
-        return k.toString();
+        return this.hash + "->" + k.toString();
     }
 }
