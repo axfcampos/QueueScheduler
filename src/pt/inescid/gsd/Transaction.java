@@ -9,6 +9,8 @@ import java.util.*;
 */
 public class Transaction implements Comparable<Transaction> {
 
+    //treemap is inverted so it sorts Operations through compare method
+    //therefore to get the most urgent Operation you simply do op.getfirstkey
     private TreeMap<Operation, Long> ops;
     private List <Transaction> causalDependencies;
     private long transaction_id; //start_ts?
@@ -30,7 +32,7 @@ public class Transaction implements Comparable<Transaction> {
         //Onde se tem a visao global das transacoes.
 
         Operation op = new Operation(row);
-        ops.put(op, (long)op.hashCode());
+        ops.put(op, row.getHashCode());
     }
 
 
@@ -60,6 +62,8 @@ public class Transaction implements Comparable<Transaction> {
         }
 
         //Breath-first search
+        //This could be improved significantly.
+        //A smarter algorithm that can learn with data behaviour and match that to heuristics
         LinkedList<Transaction> Q = new LinkedList<Transaction>(); //visit order
         Set<Transaction> V = new TreeSet<Transaction>(); //visited nodes
 

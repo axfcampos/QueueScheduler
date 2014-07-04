@@ -42,7 +42,7 @@ public class Operation implements Comparable<Operation> {
 //        }}}}}}}
 
         this.k = new K_Seq(r.sequence);
-        this.hash = r.hashCode();
+        this.hash = r.getHashCode();
     }
 
     public void updateKValues(double value){

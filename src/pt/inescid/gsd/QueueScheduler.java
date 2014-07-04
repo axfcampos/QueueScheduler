@@ -41,9 +41,20 @@ public class QueueScheduler {
 
         //Agora tenho de resolver o problema do id da operacao. Ver como e que eles fazem no Omid e simplesmente fazer hijack
         //esses ids... ou implementar algo parecido.
+
+
+        //so the story is:
+        //For the inserted transaction check for each operation
+        //which operations are commom with the ones in the queue.
+        //If there are update their urgency according to the values.
+        //and place them as dependencies if there arent explicit dependencies.
+
+
         for (RowKey r : rows){
             tx.addOperation(r);
         }
+
+
 
         this.theQueue.add(tx);
     }
