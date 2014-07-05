@@ -35,6 +35,9 @@ public class Transaction implements Comparable<Transaction> {
         ops.put(op, row.getHashCode());
     }
 
+    public long getTransactionId(){
+        return this.transaction_id;
+    }
     public void update(Transaction tx, RowKey[] rows){
 
         //if i have one of these rows on my operations
@@ -120,7 +123,15 @@ public class Transaction implements Comparable<Transaction> {
     @Override
     public String toString(){
 
-        String ret = "[ tx_id: " + this.transaction_id + " c_ts: " + this.commit_ts + "\n";
+        String ret = "[ tx_id: " + this.transaction_id + " c_ts: " + this.commit_ts + " urg: " +
+                this.ops.firstKey().getHash() + " deps: ";
+
+        for (Transaction tx : this.causalDependencies){
+
+            ret += tx.getTransactionId() + ",";
+        }
+
+        ret += "\n";
 
         int size = ops.size();
         for (Operation op : ops.keySet()){

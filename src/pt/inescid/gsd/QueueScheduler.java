@@ -26,6 +26,7 @@ public class QueueScheduler {
     //RowKey[] rows -> affected rows
     public void insertTransaction(long transaction_id, long commit_ts, RowKey[] rows){
 
+
         Transaction tx = new Transaction(transaction_id, commit_ts);
 
 
@@ -52,6 +53,14 @@ public class QueueScheduler {
             t.update(tx, rows);
         }
         this.theQueue.add(tx);
+    }
+
+    public void insertTransaction (long transaction_id, long commit_ts, RowKey[] rows, RowKey[] dependencies){
+
+
+        if(dependencies != null ){
+            //TODO implement explicit dependency declaration
+        }
     }
 
     public void print(){
