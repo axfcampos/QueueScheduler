@@ -34,16 +34,8 @@ public class QueueScheduler {
         //.....
         //Identificando assim tabem se ha operacoes em comum que teem que ser update entano tambem he dependencias implicitas.
         //Caso nao venha nenhuma dependencia explicita. Serao inferidas dependencias implicitas atravez deste metodo!!!! :D
-
-
         //Agora tenho de resolver o problema do id da operacao. Ver como e que eles fazem no Omid e simplesmente fazer hijack
         //esses ids... ou implementar algo parecido.
-
-
-
-
-
-
 
         for (RowKey r : rows){
             tx.addOperation(r);
