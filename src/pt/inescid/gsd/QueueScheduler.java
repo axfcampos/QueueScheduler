@@ -1,8 +1,5 @@
 package pt.inescid.gsd;
 
-import pt.inescid.gsd.k.K;
-import pt.inescid.gsd.k.K_Seq;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,19 +40,25 @@ public class QueueScheduler {
         //esses ids... ou implementar algo parecido.
 
 
-        //so the story is:
-        //For the inserted transaction check for each operation
-        //which operations are commom with the ones in the queue.
-        //If there are update their urgency according to the values.
-        //and place them as dependencies if there arent explicit dependencies.
+
+
+
 
 
         for (RowKey r : rows){
             tx.addOperation(r);
         }
 
+        //so the story is:
+        //For the inserted transaction check for each operation
+        //which operations are commom with the ones in the queue.
+        //If there are update their urgency according to the values.
+        //and place them as dependencies if there arent explicit dependencies.
 
+        for (Transaction t : this.theQueue){
 
+            t.update(tx, rows);
+        }
         this.theQueue.add(tx);
     }
 

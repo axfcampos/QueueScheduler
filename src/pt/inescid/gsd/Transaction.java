@@ -31,8 +31,16 @@ public class Transaction implements Comparable<Transaction> {
         //Portanto nao vai ser neste metodo. Vai ser no metodo do QueueScheduler
         //Onde se tem a visao global das transacoes.
 
-        Operation op = new Operation(row);
+        Operation op = new Operation(this, row);
         ops.put(op, row.getHashCode());
+    }
+
+    public void update(Transaction tx, RowKey[] rows){
+
+        //if i have one of these rows on my operations
+        //  update the operation K vector
+        //  and add myself to the tx dependencies
+        //  since tx depends on me :D
     }
 
 

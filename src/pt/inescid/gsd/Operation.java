@@ -7,13 +7,14 @@ public class Operation implements Comparable<Operation> {
 
     private K k;
     private long hash; //row id
+    private Transaction parent;
 
     //real order position in the transaction
     //info relativa as rows alteradas ainda por decidir
     //private RowKeyRead = null or not
     //private RowKeyWrite = null or not
 
-    public Operation(RowKey r){
+    public Operation(Transaction parent, RowKey r){
 
 
 //        if(r.sequence != -1 && r.value != -1 && r.time != -1){
@@ -41,8 +42,13 @@ public class Operation implements Comparable<Operation> {
 //            System.out.println("huge error K");
 //        }}}}}}}
 
+        this.parent = parent;
         this.k = new K_Seq(r.sequence);
         this.hash = r.getHashCode();
+    }
+
+    public Transaction getParent(){
+        return this.parent;
     }
 
     public void updateKValues(double value){
