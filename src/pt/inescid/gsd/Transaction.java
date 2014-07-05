@@ -86,30 +86,36 @@ public class Transaction implements Comparable<Transaction> {
         //Breath-first search
         //This could be improved significantly.
         //A smarter algorithm that can learn with data behaviour and match that to heuristics
+        Transaction t;
         LinkedList<Transaction> Q = new LinkedList<Transaction>(); //visit order
-        Set<Transaction> V = new TreeSet<Transaction>(); //visited nodes
+        LinkedList<Transaction> V = new LinkedList<Transaction>(); //visited nodes
 
         Q.addFirst(this);
-        V.add(this);
+        V.addFirst(this);
+
 
         while(!Q.isEmpty()){
 
-            Transaction t = Q.getFirst();
+            t = Q.getFirst();
+            Q.removeFirst();
 
             //dependency found! its ogre
-            if(t.equals(follower)){
+            if(t.getTransactionId() == follower.getTransactionId()){
                 return true;
             }
 
             for (Transaction tx : t.causalDependencies) {
                 if (!V.contains(tx)) {
-                    V.add(tx);
+                    V.addFirst(tx);
                     Q.addFirst(tx);
                 }
             }
         }
-
         return false;
+//        if(this.causalDependencies.contains(follower)){
+//            return true;
+//        }
+//        return false;
     }
 
     public Operation getMostUrgent(){

@@ -58,7 +58,9 @@ public class Main {
         rows4[0] = r31;
         q.insertTransaction(7, 8, rows4);
 
+        q.sort();
         q.print();
+
     }
 
     public static void test_random(){
