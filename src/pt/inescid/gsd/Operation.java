@@ -47,6 +47,9 @@ public class Operation implements Comparable<Operation> {
         this.hash = r.getHashCode();
     }
 
+    public long getHash(){
+        return this.hash;
+    }
     public Transaction getParent(){
         return this.parent;
     }

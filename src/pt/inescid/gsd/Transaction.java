@@ -41,9 +41,20 @@ public class Transaction implements Comparable<Transaction> {
         //  update the operation K vector
         //  and add myself to the tx dependencies
         //  since tx depends on me :D
+
+        for (Operation op : this.ops.keySet()){
+            for ( RowKey row : rows){
+                if(op.getHash() == row.getHashCode()){
+                    op.updateKValues(row.value);
+                    tx.addDependency(this);
+                }
+            }
+        }
     }
 
-
+    public void addDependency(Transaction tx){
+        this.causalDependencies.add(tx);
+    }
     @Override
     public int compareTo(Transaction o) {
 
