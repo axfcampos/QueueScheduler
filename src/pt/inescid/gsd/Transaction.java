@@ -112,10 +112,6 @@ public class Transaction implements Comparable<Transaction> {
             }
         }
         return false;
-//        if(this.causalDependencies.contains(follower)){
-//            return true;
-//        }
-//        return false;
     }
 
     public Operation getMostUrgent(){
