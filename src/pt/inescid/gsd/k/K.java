@@ -31,9 +31,9 @@ public abstract class K implements Comparable<K> {
     public int compareTo(K o) {
 
         if (this.getUrgency() >= o.getUrgency()) {
-            return 1; //im more urgent
+            return -1; //im more urgent
         } else {
-            return -1; //im less urgent
+            return 1; //im less urgent
         }
     }
 

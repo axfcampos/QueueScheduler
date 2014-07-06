@@ -64,9 +64,9 @@ public class Transaction implements Comparable<Transaction> {
         if(this.getMostUrgent().compareTo(o.getMostUrgent()) == 1){
 
             if(this.checkIfInDependencies(o)){
-                return -1;
-            }else{
                 return 1;
+            }else{
+                return -1;
             }
         }else{
             if(o.checkIfInDependencies(this)){

@@ -64,10 +64,10 @@ public class Operation implements Comparable<Operation> {
 
         if(this.k.compareTo(o.k) == 1){
             //i won, im more urgent
-            return 1;
+            return -1;
         }else{
             //i lost, he is more urgent
-            return -1;
+            return 1;
         }
     }
 
