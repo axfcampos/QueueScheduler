@@ -12,7 +12,7 @@ public class Main {
 
     }
 
-    public static void test_most_urgent_operation_follow(QueueScheduler q){
+    public static void test_most_urgent_operation_follow(QueueScheduler q, long startTime){
 
 
         //Main transaction with a row id = 1
@@ -56,13 +56,15 @@ public class Main {
         q.insertTransaction(15, 16, rows4);
 
         q.sort();
+        long endTime = System.currentTimeMillis() - startTime;
         q.print();
+        System.out.println(" \\ \\ Execution time = " + endTime + " ms");
 
     }
 
     public static void test_most_urgent_operation(){
 
-
+        long startTime = System.currentTimeMillis();
         QueueScheduler q = new QueueScheduler();
 
         //Main transaction with a row id = 1
@@ -106,9 +108,9 @@ public class Main {
         q.insertTransaction(7, 8, rows4);
 
         q.sort();
-        q.print();
 
-        test_most_urgent_operation_follow(q);
+
+        test_most_urgent_operation_follow(q, startTime);
 
     }
 
