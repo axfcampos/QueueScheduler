@@ -32,6 +32,7 @@ public class Transaction implements Comparable<Transaction> {
     public long getTransactionId(){
         return this.transaction_id;
     }
+
     public void update(Transaction tx, RowKey[] rows){
 
         //if i have one of these rows on my operations

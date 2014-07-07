@@ -47,8 +47,15 @@ public class QueueScheduler {
 
     public void insertTransaction (long transaction_id, long commit_ts, RowKey[] rows, RowKey[] dependencies){
 
+        //Here dependencies may be completely unrelated to the rows being changed.
+        //As in a dependency can be declared even if there are no common rows affected between Transactions.
+        //Since it is impossible to infer dependencies if there are no common affected rows they need to be
+        //explicitly defined.
         if(dependencies != null ){
             //TODO implement explicit dependency declaration
+
+        }else{
+            insertTransaction(transaction_id, commit_ts, rows);
         }
     }
 
