@@ -308,8 +308,3 @@ public class Main {
 }
 
 
-/*TODO
-make a test where all operations depend of a single operation.
-and all of them are independent. Then increment their sequence so they are all different.
-The scheduler should schedule them after the main dependency and then order them according to sequence
- */
