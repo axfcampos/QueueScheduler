@@ -29,23 +29,13 @@ public class QueueScheduler {
 
         Transaction tx = new Transaction(transaction_id, commit_ts);
 
-
-        //Aqui tem que se verificar outras operacoes existentes
-        //Ver se sao as mesmas e fazer update... portanto as cenas dos hash_codes estao mal??
-        //.....
-        //Identificando assim tabem se ha operacoes em comum que teem que ser update entano tambem he dependencias implicitas.
-        //Caso nao venha nenhuma dependencia explicita. Serao inferidas dependencias implicitas atravez deste metodo!!!! :D
-        //Agora tenho de resolver o problema do id da operacao. Ver como e que eles fazem no Omid e simplesmente fazer hijack
-        //esses ids... ou implementar algo parecido.
-
         for (RowKey r : rows){
             tx.addOperation(r);
         }
 
-        //so the story is:
         //For the inserted transaction check for each operation
         //which operations are commom with the ones in the queue.
-        //If there are update their urgency according to the values.
+        //If they are, update their urgency according to the values.
         //and place them as dependencies if there arent explicit dependencies.
 
         for (Transaction t : this.theQueue){
@@ -56,7 +46,6 @@ public class QueueScheduler {
     }
 
     public void insertTransaction (long transaction_id, long commit_ts, RowKey[] rows, RowKey[] dependencies){
-
 
         if(dependencies != null ){
             //TODO implement explicit dependency declaration

@@ -25,12 +25,6 @@ public class Transaction implements Comparable<Transaction> {
 
     public void addOperation(RowKey row){
 
-        //O update dos K values deve estar implicito neste metodo
-        //Pois quando ha uma nova operacao a ser colocada numa transacao deve-se ver
-        //As restantes transacoes e verificar se ha updates a fazer.
-        //Portanto nao vai ser neste metodo. Vai ser no metodo do QueueScheduler
-        //Onde se tem a visao global das transacoes.
-
         Operation op = new Operation(this, row);
         ops.put(op, row.getHashCode());
     }
@@ -43,7 +37,7 @@ public class Transaction implements Comparable<Transaction> {
         //if i have one of these rows on my operations
         //  update the operation K vector
         //  and add myself to the tx dependencies
-        //  since tx depends on me :D
+        //  since tx depends on me
 
         for (Operation op : this.ops.keySet()){
             for ( RowKey row : rows){

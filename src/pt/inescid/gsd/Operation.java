@@ -9,11 +9,6 @@ public class Operation implements Comparable<Operation> {
     private long hash; //row id
     private Transaction parent;
 
-    //real order position in the transaction
-    //info relativa as rows alteradas ainda por decidir
-    //private RowKeyRead = null or not
-    //private RowKeyWrite = null or not
-
     public Operation(Transaction parent, RowKey r){
 
 
