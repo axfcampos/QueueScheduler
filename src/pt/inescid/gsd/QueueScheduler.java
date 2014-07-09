@@ -36,7 +36,7 @@ public class QueueScheduler {
         //For the inserted transaction check for each operation
         //which operations are commom with the ones in the queue.
         //If they are, update their urgency according to the values.
-        //and place them as dependencies if there arent explicit dependencies.
+        //and place them as dependencies if there arent any explicit dependencies.
 
         for (Transaction t : this.theQueue){
 
@@ -51,11 +51,20 @@ public class QueueScheduler {
         //As in a dependency can be declared even if there are no common rows affected between Transactions.
         //Since it is impossible to infer dependencies if there are no common affected rows they need to be
         //explicitly defined.
-        if(dependencies != null ){
-            //TODO implement explicit dependency declaration
-
-        }else{
+        if(dependencies == null ){
             insertTransaction(transaction_id, commit_ts, rows);
+        }else{
+
+            Transaction tx = new Transaction(transaction_id, commit_ts);
+
+            for (RowKey r : rows){
+                tx.addOperation(r);
+            }
+
+            for ( Transaction t : this.theQueue){
+                t.update(tx, rows, dependencies);
+            }
+
         }
     }
 

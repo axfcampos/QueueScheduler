@@ -50,6 +50,26 @@ public class Transaction implements Comparable<Transaction> {
         }
     }
 
+    public void update(Transaction tx, RowKey[] rows, RowKey[] deps){
+
+        for (Operation op : this.ops.keySet()){
+            for (RowKey row : rows){
+                if (op.getHash() == row.getHashCode()){
+                    op.updateKValues(row.value);
+                }
+
+            }
+            //TODO not covering all behaviour...
+            // May need to check against a certain timestamp to be considered a valid dependency to uphold
+            // Its too broad
+            for (RowKey dep : deps){
+                if (op.getHash() == dep.getHashCode() ){
+                    tx.addDependency(this);
+                }
+            }
+        }
+    }
+
     public void addDependency(Transaction tx){
         this.causalDependencies.add(tx);
     }
