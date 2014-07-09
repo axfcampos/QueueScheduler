@@ -73,6 +73,7 @@ public class Transaction implements Comparable<Transaction> {
     public void addDependency(Transaction tx){
         this.causalDependencies.add(tx);
     }
+
     @Override
     public int compareTo(Transaction o) {
 
