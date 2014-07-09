@@ -61,7 +61,7 @@ public class Transaction implements Comparable<Transaction> {
             }
             //TODO not covering all behaviour...
             // May need to check against a certain timestamp to be considered a valid dependency to uphold
-            // Its too broad
+            // Its too broad, may be heavier than implicit declaration on certain scenarios.
             for (RowKey dep : deps){
                 if (op.getHash() == dep.getHashCode() ){
                     tx.addDependency(this);
